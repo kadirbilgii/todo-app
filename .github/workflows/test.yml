@@ -21,7 +21,7 @@ jobs:
         password: ${{ secrets.PASSWORD }}
         script: |
           cd /home/kmvar/kimvar0/rx-app
-          git checkout dev
+          git checkout master
           git pull 
           npm install
           npm run build
