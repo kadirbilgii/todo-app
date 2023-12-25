@@ -1,4 +1,4 @@
-name: Update Server
+name: Otomatik Pull ve Sunucu Güncelleme
 
 on:
   push:
@@ -6,14 +6,13 @@ on:
       - master
 
 jobs:
-  deploy:
-    runs-on: ubuntu-20.04
+  update-server:
+    runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v3
+      - name: Repo
+        uses: actions/checkout@v3
 
-    
-    - name: SSH ile Sunucuya Bağlan ve Güncelle
-      run: |
-        ssh -o StrictHostKeyChecking=no -i ${{ secrets.USERNAME }}@${{ secrets.HOST }} -p ${{ secrets.PORT }} 'cd /Users/panates/Documents/personal/test/todo-app && git pull origin master && npm install && npm run build' > logs.txt
+      - name: SSH ile Sunucuya Bağlan ve Güncelle
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} -p ${{ secrets.SERVER_PORT }} 'cd /Users/panates/Documents/personal/test/todo-app && git pull origin master && npm install && npm run build'
