@@ -15,4 +15,4 @@ jobs:
 
       - name: SSH ile Sunucuya Bağlan ve Güncelle
         run: |
-          ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} -p ${{ secrets.SERVER_PORT }} 'cd /Users/panates/Documents/personal/test/todo-app && git pull origin master && npm install && npm run build'
+          git remote -v ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} -p ${{ secrets.SERVER_PORT }} 'cd /Users/panates/Documents/personal/test/todo-app && git pull origin master && npm install && npm run build'
