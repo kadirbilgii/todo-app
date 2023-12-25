@@ -13,11 +13,18 @@ jobs:
     steps:
       - name: Repo
         uses: actions/checkout@v3 
+      
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          known_hosts: 'just-a-placeholder-so-we-dont-get-errors'
 
-      - name: SSH ile Sunucuya Bağlan ve Güncelle
+      - name: Connect to server
+        run: ssh ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} 
+
+      - name: testler
         run: |
-          ssh ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} 
-          git remote -v
           cd /Users/panates/Documents/personal/test/todo-app
           git checkout master
           git pull
