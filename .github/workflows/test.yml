@@ -7,15 +7,15 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     steps:
     - name: Checkout Repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v3
 
     - name: Update Server
       run: |
-        ssh panates@192.168.35.120 sshpass -p "${{ secrets.HOST }}" 'cd /Users/panates/Documents/personal/test/todo-app && git pull origin master && npm install && npm run build' > update_logs.txt
+        ssh ubuntu@localhot sshpass -p "${{ secrets.HOST }}" 'cd /home/ubuntu/Documents/todo-app && git pull origin master && npm install && npm run build' > update_logs.txt
 
     - name: Check for Errors
       id: check-errors
@@ -31,7 +31,7 @@ jobs:
 
   notify:
     needs: deploy
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
     - name: Notify Status
       if: ${{ needs.deploy.outputs['check-errors.status'] == 'failure' }}
