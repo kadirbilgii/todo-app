@@ -20,7 +20,7 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         script: |
-          cd /home/kmvar/kimvar0/rx-app
+          cd /Users/panates/Documents/personal/test
           git checkout master
           git pull 
           npm install
