@@ -3,19 +3,27 @@ name: Update Server
 on:
   push:
     branches:
-      - master
+      - dev
 
 jobs:
   deploy:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout Repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
+
+    
+    - uses: actions/checkout@v3
+    - uses: webfactory/ssh-agent@v0.8.0
+      with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
     - name: Update Server
       run: |
-        ssh ubuntu@localhot sshpass -p "${{ secrets.HOST }}" 'cd /home/ubuntu/Documents/todo-app && git pull origin master && npm install && npm run build' > update_logs.txt
+        cd /home/ubuntu/Documents/todo-app && git pull origin master && npm install && npm run build > update_logs.txt
+    #   env:
+    #     SERVER_SSH_KEY: ${{ secrets.SERVER_SSH_KEY }}
 
     - name: Check for Errors
       id: check-errors
@@ -31,7 +39,7 @@ jobs:
 
   notify:
     needs: deploy
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
     - name: Notify Status
       if: ${{ needs.deploy.outputs['check-errors.status'] == 'failure' }}
