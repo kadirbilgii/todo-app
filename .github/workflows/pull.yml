@@ -1,3 +1,4 @@
+
 name: Otomatik Pull ve Sunucu Güncelleme
 
 on:
@@ -15,4 +16,10 @@ jobs:
 
       - name: SSH ile Sunucuya Bağlan ve Güncelle
         run: |
-          git remote -v ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} -p ${{ secrets.SERVER_PORT }} 'cd /Users/panates/Documents/personal/test/todo-app && git pull origin master && npm install && npm run build'
+          ssh ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} 
+          git remote -v
+          cd /Users/panates/Documents/personal/test/todo-app
+          git checkout master
+          git pull
+          npm install
+          npm run build
