@@ -14,15 +14,6 @@ jobs:
       uses: actions/checkout@v3
 
     
-    - name: Update Server
-      uses: appleboy/ssh-action@v1.0.0
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        password: ${{ secrets.PASSWORD }}
-        script: |
-          cd /Users/panates/Documents/personal/test/todo-app
-          git pull master
-          npm install
-          npm run build
-          | tee logfile.txt
+    - name: SSH ile Sunucuya Bağlan ve Güncelle
+      run: |
+        ssh -o StrictHostKeyChecking=no -i ${{ secrets.USERNAME }}@${{ secrets.HOST }} -p ${{ secrets.PORT }} 'cd /Users/panates/Documents/personal/test/todo-app && git pull origin master && npm install && npm run build' > logs.txt
