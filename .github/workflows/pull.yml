@@ -21,7 +21,7 @@ jobs:
           known_hosts: 'just-a-placeholder-so-we-dont-get-errors'
 
       - name: Connect to server
-        run: ssh ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} 
+        run: ssh -t ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} 
 
       - name: testler
         run: |
