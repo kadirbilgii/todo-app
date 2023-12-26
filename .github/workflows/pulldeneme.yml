@@ -19,4 +19,4 @@ jobs:
 
       - name: Update server
         run: |
-          'cd /Users/panates/Documents/personal/test/todo-app && git pull origin dev && npm install && npm run build'
+          'cd /Users/panates/Documents/personal/test/todo-app && git pull origin master && npm install && npm run build'
