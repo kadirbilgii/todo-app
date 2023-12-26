@@ -1,0 +1,22 @@
+name: Otomatik Pull ve Sunucu Güncelleme
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  update-server:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Repo
+        uses: actions/checkout@v3 
+      
+      - name: Connect to server
+        run: |
+          sshpass -p '12345' ssh ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} 
+
+      - name: Update server
+        run: |
+          'cd /Users/panates/Documents/personal/test/todo-app && git pull origin dev && npm install && npm run build'
