@@ -1,20 +1,16 @@
-name: Update Server
-
-on:
-  push:
-    branches:
-      - master
-
+name: remote ssh command
+on: [push]
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
 
+  build:
+    name: Build
+    runs-on: ubuntu-latest
     steps:
-    - name: Update Server
-      run: |
-        ssh -v -o StrictHostKeyChecking=no ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} ssh -p ${{ secrets.SERVER_PORT }} sshpass -p ${{ secrets.SERVER_PASSWORD }} 'cd /home/kmvar/test/todo-app && git checkout testyaml && git pull'
-      env:
-        SERVER_PASSWORD: ${{ secrets.SERVER_HOST }}
-        SERVER_USERNAME: ${{ secrets.SERVER_USERNAME }}
-        SERVER_HOST: ${{ secrets.SERVER_PASSWORD }}
-        SERVER_PORT: ${{ secrets.SERVER_PORT }}
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        port: ${{ secrets.PORT }}
+        script: whoami
