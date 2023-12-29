@@ -7,6 +7,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: connect ssh
-      run: ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }}:${{ secrets.APP_PORT }} sshpass -p ${{ secrets.PASSWORD }}
+      run: ssh -vvv ${{ secrets.USERNAME }}@${{ secrets.HOST }} sshpass -p ${{ secrets.PASSWORD }}
     - name: test
       run: ls
