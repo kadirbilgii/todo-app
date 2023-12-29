@@ -13,5 +13,6 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.APP_PORT }}
-        command_timeout: 200m
+        timeout: 50s
+        debug: true
         script: whoami
