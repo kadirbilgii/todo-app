@@ -16,6 +16,9 @@ jobs:
     - name: Deploy to Linux Server
       run: |
         ssh -i ${{ secrets.SSH_PRIVATE_KEY }} kimvardev@192.168.35.16 "cd /home/kimvardev/test/todo-app && git pull origin master && npm install && npm run build"
-      env:
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+    env:
+      SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+    
+
+        
     
