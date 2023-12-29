@@ -18,9 +18,8 @@ jobs:
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
-        password: ${{ secrets.PASSWORD }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
-        port: ${{ secrets.APP_PORT }}
+        port: 22
         
     - name: test
       run: whoami
