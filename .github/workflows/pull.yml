@@ -12,7 +12,7 @@ jobs:
     steps:
     - name: Update Server
       run: |
-        ssh ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} ssh -p ${{ secrets.SERVER_PORT }} sshpass -p ${{ secrets.SERVER_PASSWORD }} 'cd /home/kmvar/test/todo-app && git checkout testyaml && git pull'
+        ssh -v -o StrictHostKeyChecking=no ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} ssh -p ${{ secrets.SERVER_PORT }} sshpass -p ${{ secrets.SERVER_PASSWORD }} 'cd /home/kmvar/test/todo-app && git checkout testyaml && git pull'
       env:
         SERVER_PASSWORD: ${{ secrets.SERVER_HOST }}
         SERVER_USERNAME: ${{ secrets.SERVER_USERNAME }}
