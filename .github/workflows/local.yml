@@ -1,4 +1,4 @@
-name: Auto Pull on Server
+name: Deploy to Linux Server
 
 on:
   push:
@@ -6,13 +6,16 @@ on:
       - master
 
 jobs:
-  auto-pull:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Check Out Repository
+    - name: Checkout Repository
       uses: actions/checkout@v2
 
-    - name: Auto Pull on Server
-      run: git pull origin master
-      working-directory: /home/kimvardev/test/todo-app
+    - name: Deploy to Linux Server
+      run: |
+        ssh -i ${{ secrets.SSH_PRIVATE_KEY }} kimvardev@192.168.35.16 "cd /home/kimvardev/test/todo-app && git pull origin master && npm install && npm run build"
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+    
