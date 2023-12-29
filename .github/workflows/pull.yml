@@ -1,12 +1,19 @@
-name: remote ssh command
-on: [push]
-jobs:
+name: Auto Pull on Server
 
-  build:
-    name: Build
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  auto-pull:
     runs-on: ubuntu-latest
+
     steps:
-    - name: connect ssh
-      run: |
-        ssh-keyscan -H 192.168.35.16 >> ~/.ssh/known_hosts
-        ssh kimvardev@192.168.35.16 "whoami"
+    - name: Check Out Repository
+      uses: actions/checkout@v2
+
+    - name: Auto Pull on Server
+      run: ssh kimvardev@192.168.35.16 "cd /home/kimvardev/test/todo-app && git pull origin master"
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
