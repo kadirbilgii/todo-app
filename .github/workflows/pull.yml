@@ -7,6 +7,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: connect ssh
-      run: sshpass -p ${{ secrets.PASSWORD }} ssh -tt ${{ secrets.USERNAME }}@${{ secrets.HOST }}
-    - name: test
-      run: ls
+      run: |
+        ssh-keyscan -H 192.168.35.16 >> ~/.ssh/known_hosts
+        ssh kimvardev@192.168.35.16 "whoami"
