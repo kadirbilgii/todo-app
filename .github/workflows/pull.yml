@@ -3,7 +3,7 @@ name: Update Server
 on:
   push:
     branches:
-      - testyaml
+      - master
 
 jobs:
   deploy:
@@ -21,4 +21,4 @@ jobs:
         password: ${{ secrets.SERVER_PASSWORD }}
 
     - name: Update Server
-      run: cd /home/kmvar/test/todo-app && git checkout testyaml && git pull
+      run: cd /home/kmvar/test/todo-app && git checkout master && git pull
