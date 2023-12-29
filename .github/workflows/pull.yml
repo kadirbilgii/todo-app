@@ -7,10 +7,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: executing remote ssh commands using password
-      uses: appleboy/ssh-action@master
+      uses: appleboy/ssh-action@v1.0.1
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.APP_PORT }}
+        command_timeout: 200m
         script: whoami
