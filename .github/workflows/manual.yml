@@ -15,6 +15,7 @@ jobs:
 
     - name: Setup SSH
       run: |
+        mkdir -p ~/.ssh/
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
@@ -25,4 +26,7 @@ jobs:
 
     - name: Update Server
       run: |
-        cd /home/kmvar/hooks/todo-app && git pull origin master && npm install && npm run build
+        cd /home/kmvar/hooks/todo-app 
+        git pull origin master
+        npm install 
+        npm run build
