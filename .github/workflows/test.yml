@@ -1,13 +1,24 @@
-name: Remote update execution
+name: Deploy to SSH Server
+
 on:
   push:
     branches:
-      - master
-jobs:
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Test SSH Connection
-        run: ssh -v -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p 22 ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}
+      - master  # Değişiklik olduğunda çalışacak branch adını buraya ekleyin
 
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          known_hosts: ${{ secrets.SSH_KNOWN_HOST }}
+
+      - name: Deploy to SSH Server
+        run: |
+          ssh kmvar@192.168.35.68 "whoami"
