@@ -21,4 +21,4 @@ jobs:
 
       - name: Deploy to SSH Server
         run: |
-          ssh kmvar@192.168.35.68 "whoami"
+          ssh kmvar@192.168.35.68:22 "whoami"
