@@ -21,4 +21,4 @@ jobs:
 
       - name: Deploy to SSH Server
         run: |
-          ssh -v -v -v -p 22 kmvar@192.168.35.68 "whoami"
+          ssh -v -o StrictHostKeyChecking=no -p 22 kmvar@192.168.35.68 "whoami"
