@@ -1,0 +1,17 @@
+name: Jenkins Build
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Trigger Jenkins Job
+        run: curl -X POST http://192.168.35.120:8080/job/test/build?token=token
