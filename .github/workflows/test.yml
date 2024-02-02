@@ -17,6 +17,6 @@ jobs:
           known_hosts: ${{ secrets.SSH_KNOWN_HOST }}
 
       - name: Connect Server
-        run: ssh -v ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}
+        run: ssh -v ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.SSH_PORT }}
       - name: Update Server
         run: cd /home/kmvar/todo-app && git checkout master && git pull && npm install && nest build
