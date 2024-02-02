@@ -16,17 +16,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           known_hosts: ${{ secrets.SSH_KNOWN_HOST }}
 
+      - name: Connect Server
+        run: ssh -v ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}
       - name: Update Server
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          password: ${{ secrets.SSH_PASSWORD }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: ${{ secrets.SSH_PORT }}
-          script: |
-            cd /home/kmvar/todo-app
-            git checkout master
-            git pull
-            npm install 
-            nest build
+        run: cd /home/kmvar/todo-app && git checkout master && git pull && npm install && nest build
